@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet'; // 處理 SEO
-import { MapPin, Bus, Car, TreePine, Ruler, DollarSign, Phone, User, CheckCircle2, ChevronDown, ArrowRight } from 'lucide-react';
+import { MapPin, Bus, Car, TreePine, Ruler, DollarSign, Phone, User, CheckCircle2, ChevronDown, ArrowRight, MessageCircle } from 'lucide-react'; // 新增 MessageCircle 作為 LINE 圖示
 
 import img1 from './assets/p1.jpg';
 import img2 from './assets/p2.jpg';
@@ -8,7 +8,7 @@ import img3 from './assets/p3.jpg';
 import img4 from './assets/p4.jpg';
 import img5 from './assets/p5.jpg';
 import img6 from './assets/p6.jpg';
-import img9 from './assets/p9.jpg'; // 新增 p9 照片匯入
+import img9 from './assets/p9.jpg';
 
 const App = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -294,7 +294,6 @@ const App = () => {
               { src: img3, alt: '青雲路金店面實景照 - 採光極佳' },
               { src: img4, alt: '新北店面出租實景照 - 挑高格局' },
               { src: img6, alt: '土城店面大門外觀實景 - 鄰近公園與停車場' },
-              // 2. 新增 p9 照片
               { src: img9, alt: '土城店面實景照 - 空間細節' } 
             ].map((photo, index) => (
               <div key={index} className="overflow-hidden rounded-sm shadow-sm group bg-zinc-100">
@@ -319,7 +318,9 @@ const App = () => {
             優質地段稀有釋出，事業發展的完美起點。<br/>歡迎來電洽詢，屋主將為您導覽。
           </p>
 
-          <div className="bg-white/95 p-10 md:p-14 shadow-2xl border border-white/20 max-w-2xl mx-auto flex flex-col md:flex-row items-center justify-center gap-10 rounded-sm backdrop-blur-md">
+          <div className="bg-white/95 p-10 md:p-14 shadow-2xl border border-white/20 max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12 rounded-sm backdrop-blur-md">
+            
+            {/* 1. 聯絡人 */}
             <div className="flex flex-col items-center text-center">
               <div className="w-16 h-16 bg-zinc-100 rounded-full flex items-center justify-center mb-4 text-zinc-900">
                 <User className="w-8 h-8" />
@@ -328,9 +329,11 @@ const App = () => {
               <div className="text-xl font-medium font-sans-tc text-zinc-900">鄭先生</div>
             </div>
             
+            {/* 分隔線 1 */}
             <div className="hidden md:block w-px h-24 bg-zinc-200"></div>
             <div className="block md:hidden w-24 h-px bg-zinc-200"></div>
 
+            {/* 2. 聯絡電話 */}
             <div className="flex flex-col items-center text-center">
               <div className="w-16 h-16 bg-amber-50 rounded-full flex items-center justify-center mb-4 text-amber-600">
                 <Phone className="w-8 h-8" />
@@ -340,10 +343,26 @@ const App = () => {
                 0955-599-119
               </a>
             </div>
+
+            {/* 分隔線 2 */}
+            <div className="hidden md:block w-px h-24 bg-zinc-200"></div>
+            <div className="block md:hidden w-24 h-px bg-zinc-200"></div>
+
+            {/* 3. LINE 好友 (新增) */}
+            <div className="flex flex-col items-center text-center">
+              <div className="w-16 h-16 bg-[#06C755]/10 rounded-full flex items-center justify-center mb-4 text-[#06C755]">
+                <MessageCircle className="w-8 h-8" />
+              </div>
+              <div className="text-sm text-zinc-500 tracking-widest mb-1 font-light">LINE 諮詢</div>
+              <a href="https://line.me/ti/p/aM-a4jS34u" target="_blank" rel="noopener noreferrer" className="text-2xl md:text-3xl font-semibold font-sans-tc text-zinc-900 hover:text-[#06C755] transition-colors" aria-label="加入屋主鄭先生的 LINE 好友">
+                加入好友
+              </a>
+            </div>
+
           </div>
           
           <div className="mt-12 text-white/70 text-sm font-light font-sans-tc">
-            來電時請告知是在網站上看到此出租資訊，謝謝！
+            來電或加 LINE 時請告知是在網站上看到此出租資訊，謝謝！
           </div>
         </div>
       </section>
