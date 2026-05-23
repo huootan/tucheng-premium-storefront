@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet'; // 處理 SEO
 import { MapPin, Bus, Car, TreePine, Ruler, DollarSign, Phone, User, CheckCircle2, ChevronDown, ArrowRight } from 'lucide-react';
 
 import img1 from './assets/p1.jpg';
@@ -7,6 +8,7 @@ import img3 from './assets/p3.jpg';
 import img4 from './assets/p4.jpg';
 import img5 from './assets/p5.jpg';
 import img6 from './assets/p6.jpg';
+import img9 from './assets/p9.jpg'; // 新增 p9 照片匯入
 
 const App = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -28,8 +30,53 @@ const App = () => {
     }
   };
 
+  // 建立 JSON-LD 結構化資料 (Schema.org - RealEstateListing)
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "RealEstateAgent",
+    "name": "新北土城重劃區稀有金店面出租",
+    "description": "土城青雲路341號一樓，權狀80坪大面寬黃金店面出租。緊鄰清水商圈與重劃區，適合百業進駐。",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "青雲路 341 號一樓",
+      "addressLocality": "土城區",
+      "addressRegion": "新北市",
+      "addressCountry": "TW"
+    },
+    "telephone": "0955-599-119",
+    "priceRange": "$120,000 NTD",
+    "image": "YOUR_WEBSITE_URL/p6.jpg" // 建議上線後替換為真實絕對路徑的圖片 URL
+  };
+
   return (
     <div className="min-h-screen font-sans text-zinc-800 bg-[#FAFAFA] selection:bg-amber-700 selection:text-white">
+      {/* 🚀 大量注入 SEO 標題、描述與中繼標籤 */}
+      <Helmet>
+        {/* 基礎 SEO */}
+        <title>新北土城店面出租｜青雲路大面寬金店面・重劃區黃金地段 80坪</title>
+        <meta name="description" content="新北土城稀有金店面出租，位於青雲路341號一樓。擁有9米超大面寬、權狀80坪挑高方正格局。緊鄰清水舊商圈與重劃區，停車便利，對面即是公園。月租12萬，屋主自租仲介勿擾，適合連鎖品牌、醫療診所、精品旗艦店進駐。" />
+        <meta name="keywords" content="土城店面出租, 新北店面出租, 土城重劃區店面, 青雲路店面, 黃金店面, 大面寬店面, 捷運海山站店面, 挑高店面出租, 屋主自租店面" />
+        <link rel="canonical" href="https://your-website-url.com" /> {/* 請替換為實際上線網址 */}
+
+        {/* Open Graph (Facebook, LINE 分享優化) */}
+        <meta property="og:title" content="新北土城稀有金店面出租｜青雲路大面寬80坪" />
+        <meta property="og:description" content="超大面寬9米・開門即公園・緊鄰新舊生活圈。月租12萬，誠信出租，歡迎預約看屋。" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content={img6} />
+        <meta property="og:locale" content="zh_TW" />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="新北土城店面出租｜重劃區黃金地段" />
+        <meta name="twitter:description" content="土城青雲路341號一樓，權狀80坪大面寬黃金店面。緊鄰清水商圈與重劃區，百業皆宜。" />
+        <meta name="twitter:image" content={img6} />
+
+        {/* 注入 JSON-LD 結構化資料 */}
+        <script type="application/ld+json">
+          {JSON.stringify(structuredData)}
+        </script>
+      </Helmet>
+
       {/* 內建自訂動畫樣式 */}
       <style dangerouslySetInnerHTML={{__html: `
         @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;600&family=Noto+Sans+TC:wght@300;400;500&display=swap');
@@ -61,10 +108,11 @@ const App = () => {
           <div className={`text-xl tracking-widest font-serif-tc font-semibold ${isScrolled ? 'text-zinc-900' : 'text-white'}`}>
             PREMIUM<span className="text-amber-600 ml-2">STOREFRONT</span>
           </div>
-          <div className="hidden md:flex space-x-8 text-sm tracking-widest">
+          <div className="hidden md:flex space-x-8 text-sm tracking-widest items-center">
             <button onClick={() => scrollTo('advantages')} className={`${isScrolled ? 'text-zinc-600 hover:text-amber-600' : 'text-white/80 hover:text-white'} transition-colors`}>四大優勢</button>
             <button onClick={() => scrollTo('details')} className={`${isScrolled ? 'text-zinc-600 hover:text-amber-600' : 'text-white/80 hover:text-white'} transition-colors`}>基本資料</button>
-            <button onClick={() => scrollTo('gallery')} className={`${isScrolled ? 'text-zinc-600 hover:text-amber-600' : 'text-white/80 hover:text-white'} transition-colors`}>空間展示</button>
+            <button onClick={() => scrollTo('gallery')} className={`${isScrolled ? 'text-zinc-600 hover:text-amber-600' : 'text-white/80 hover:text-white'} transition-colors`}>平面空間</button>
+            <button onClick={() => scrollTo('real-photos')} className={`${isScrolled ? 'text-zinc-600 hover:text-amber-600' : 'text-white/80 hover:text-white'} transition-colors`}>實景展示</button>
             <button onClick={() => scrollTo('contact')} className={`px-5 py-2 border rounded-full transition-all ${isScrolled ? 'border-zinc-900 text-zinc-900 hover:bg-zinc-900 hover:text-white' : 'border-white text-white hover:bg-white hover:text-zinc-900'}`}>預約看屋</button>
           </div>
         </div>
@@ -72,15 +120,14 @@ const App = () => {
 
       {/* 首圖 Hero 區塊 */}
       <header className="relative h-screen flex items-center justify-center overflow-hidden">
-        {/* 背景圖片：使用匯入的 img6 */}
         <div 
           className="absolute inset-0 w-full h-full bg-cover bg-center transform scale-105 transition-transform duration-10000 hover:scale-100"
           style={{ backgroundImage: `url(${img6})` }}
+          aria-label="土城青雲路店面首圖實景"
         >
-          <div className="absolute inset-0 bg-zinc-900/50 z-10"></div> {/* 暗色遮罩讓文字更清晰 */}
+          <div className="absolute inset-0 bg-zinc-900/50 z-10"></div>
         </div>
 
-        {/* 標題內容 */}
         <div className="relative z-20 text-center px-6 max-w-4xl mx-auto flex flex-col items-center">
           <span className="fade-in-up text-amber-500 tracking-[0.3em] text-sm md:text-base font-medium mb-4 block">NEW TAIPEI CITY, TUCHENG</span>
           <h1 className="fade-in-up delay-100 text-4xl md:text-6xl lg:text-7xl text-white font-serif-tc font-semibold leading-tight mb-6">
@@ -98,7 +145,6 @@ const App = () => {
           </button>
         </div>
 
-        {/* 滾動提示 */}
         <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20 animate-bounce text-white/60">
           <ChevronDown className="w-8 h-8" />
         </div>
@@ -200,7 +246,7 @@ const App = () => {
         </div>
       </section>
 
-      {/* 空間展示區塊 (Gallery) */}
+      {/* 空間展示區塊 (Gallery) - 平面圖 */}
       <section id="gallery" className="py-24 bg-[#FAFAFA]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-end mb-16">
@@ -213,21 +259,52 @@ const App = () => {
             </p>
           </div>
           
-          {/* 平面圖：使用匯入的 img1 和 img5 */}
           <div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center bg-white p-8 border border-zinc-100 shadow-sm rounded-sm">
               <img 
                 src={img1} 
-                alt="店面整體平面圖" 
+                alt="土城店面整體平面圖 - 空間方正挑高" 
                 className="w-full h-auto object-cover max-h-[600px] hover:scale-105 transition-transform duration-500"
               />
               <img 
                 src={img5} 
-                alt="店面尺寸細節圖" 
+                alt="青雲路店面尺寸細節圖 - 9米大面寬" 
                 className="w-full h-auto object-cover max-h-[600px] hover:scale-105 transition-transform duration-500"
               />
             </div>
             <p className="text-center text-zinc-400 text-sm mt-6 font-light tracking-wide">*平面圖為示意圖，實際尺寸以現場為準</p>
+          </div>
+        </div>
+      </section>
+
+      {/* 實景照片區塊 */}
+      <section id="real-photos" className="py-24 bg-white border-t border-zinc-100">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-serif-tc font-semibold mb-4 text-zinc-900">實景展示</h2>
+            <div className="w-12 h-1 bg-amber-600 mx-auto"></div>
+            <p className="text-zinc-500 font-sans-tc font-light max-w-2xl mx-auto mt-6">
+              寬敞明亮的實際空間，為您的品牌打造最具質感的迎賓氛圍。
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {[
+              { src: img2, alt: '土城重劃區店面實景照 - 寬敞內部空間' },
+              { src: img3, alt: '青雲路金店面實景照 - 採光極佳' },
+              { src: img4, alt: '新北店面出租實景照 - 挑高格局' },
+              { src: img6, alt: '土城店面大門外觀實景 - 鄰近公園與停車場' },
+              // 2. 新增 p9 照片
+              { src: img9, alt: '土城店面實景照 - 空間細節' } 
+            ].map((photo, index) => (
+              <div key={index} className="overflow-hidden rounded-sm shadow-sm group bg-zinc-100">
+                <img 
+                  src={photo.src} 
+                  alt={photo.alt} 
+                  className="w-full aspect-[16/9] object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out cursor-pointer"
+                />
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -237,9 +314,9 @@ const App = () => {
         <div className="absolute inset-0 bg-zinc-900/70 backdrop-blur-[2px]"></div>
 
         <div className="max-w-4xl mx-auto px-6 relative z-10 text-center">
-          <h2 className="text-3xl md:text-5xl font-serif-tc font-semibold mb-6 text-white">立即預約，搶佔金店面</h2>
+          <h2 className="text-3xl md:text-5xl font-serif-tc font-semibold mb-6 text-white">立即聯絡，搶佔金店面。<br/>誠信出租，仲介勿擾。</h2>
           <p className="text-white/90 mb-12 font-sans-tc font-light text-lg">
-            優質地段稀有釋出，百萬裝潢與事業發展的完美起點。<br/>歡迎來電洽詢，我們將安排專人為您導覽。
+            優質地段稀有釋出，事業發展的完美起點。<br/>歡迎來電洽詢，屋主將為您導覽。
           </p>
 
           <div className="bg-white/95 p-10 md:p-14 shadow-2xl border border-white/20 max-w-2xl mx-auto flex flex-col md:flex-row items-center justify-center gap-10 rounded-sm backdrop-blur-md">
@@ -259,7 +336,7 @@ const App = () => {
                 <Phone className="w-8 h-8" />
               </div>
               <div className="text-sm text-zinc-500 tracking-widest mb-1 font-light">聯絡電話</div>
-              <a href="tel:0955599119" className="text-2xl md:text-3xl font-semibold font-sans text-zinc-900 hover:text-amber-600 transition-colors">
+              <a href="tel:0955599119" className="text-2xl md:text-3xl font-semibold font-sans text-zinc-900 hover:text-amber-600 transition-colors" aria-label="撥打電話給屋主鄭先生：0955-599-119">
                 0955-599-119
               </a>
             </div>
